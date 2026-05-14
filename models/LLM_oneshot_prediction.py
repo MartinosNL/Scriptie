@@ -2,9 +2,9 @@ import json
 import os
 import ollama
 
-brackets = ["<3ms", "3-5ms", "5-10ms", "10ms-1s", ">1s"]
+brackets = ["<3ms", "3-4ms", "4-5ms", "5-10ms", "10ms-1s", ">1s"]
 
-start_prompt = "You are an expert in predicting the runtime of a piece of Pyhton code. Your task is to predict the runtime of a Python code snippet when executed via Google Colab. You must respond with ONLY one of the following bracket labels, nothing else: <3ms, 3-5ms, 5-10ms, 10ms-1s, >1s. Do not include any explanation, punctuation or extra text, just the bracket label."
+start_prompt = "You are an expert in predicting the runtime of a piece of Python code. Your task is to predict the runtime of a Python code snippet when executed via Google Colab. You must respond with ONLY one of the following bracket labels, nothing else: <3ms, 3-4ms, 4-5ms, 5-10ms, 10ms-1s, >1s. Do not include any explanation, punctuation or extra text, just the bracket label."
 
 path = "C:\\Users\\hulsm\\Documents\\Scriptie\\data_and_generation\\final_data\\"
 
@@ -30,14 +30,14 @@ def predict_runtime(code):
     return prediction
 
 def main():
-    data = open_data(os.path.join(path, "final_data_v1.json"))
+    data = open_data(os.path.join(path, "final_data.json"))
     for item in data:
         code_snippet = item["code"]
         prediction = predict_runtime(code_snippet)
         print(f"Predicted runtime: {prediction}")
         item["llm_prediction"] = prediction
 
-    with open(os.path.join(path, "final_data_with_predictions_v1.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(path, "final_data_with_LLM_predictions.json"), "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
