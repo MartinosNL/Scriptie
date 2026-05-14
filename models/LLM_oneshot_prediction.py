@@ -30,14 +30,16 @@ def predict_runtime(code):
     return prediction
 
 def main():
-    data = open_data(os.path.join(path, "final_data.json"))
+    data = open_data(os.path.join(path, "final_data_with_LLM_predictions_v1.json"))
     for item in data:
+        if item["llm_prediction"] != None:
+            continue
         code_snippet = item["code"]
         prediction = predict_runtime(code_snippet)
         print(f"Predicted runtime: {prediction}")
         item["llm_prediction"] = prediction
 
-    with open(os.path.join(path, "final_data_with_LLM_predictions.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(path, "final_data_with_LLM_predictions_v1.json"), "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
