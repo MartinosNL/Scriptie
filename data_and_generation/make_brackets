@@ -1,7 +1,7 @@
 import os
 import json
 
-path = "C:\\Users\\hulsm\\Documents\\Scriptie\\data_and_generation\\used_data\\"
+path = "C:\\Users\\hulsm\\Documents\\Scriptie\\data_and_generation\\"
 
 def calculate_brackets(runtime):
     if isinstance(runtime, str) and runtime == "Timeout":
@@ -9,8 +9,10 @@ def calculate_brackets(runtime):
     else:
         if runtime < 0.003:
             return "0-3ms"
+        elif runtime < 0.004:
+            return "3-4ms"
         elif runtime < 0.005:
-            return "3-5ms"
+            return "4-5ms"
         elif runtime < 0.01:
             return "5-10ms"
         elif runtime < 1:
@@ -21,8 +23,8 @@ def calculate_brackets(runtime):
 
 
 def main():
-    input_file = os.path.join(path, "complexity_ast_combined\\combined_ast_complexity.json")
-    output_file = os.path.join(path, "final_data\\final_data.json")
+    input_file = os.path.join(path, "used_data\\complexity_ast_combined\\combined_ast_complexity_v1.json")
+    output_file = os.path.join(path, "final_data\\final_data_v1.json")
     with open(input_file, "r", encoding="utf-8") as f:
         data = json.load(f)
     for item in data:
