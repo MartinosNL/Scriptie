@@ -49,9 +49,7 @@ def preprocess_data(df):
     le = LabelEncoder()
     y = le.fit_transform(df["runtime_bracket"])
 
-    # TF-IDF features
-    vectorizer = TfidfVectorizer(max_features=1000)
-    x = vectorizer.fit_transform(df["complexity"].astype(str))
+    x = df[["complexity"]].values
 
     return x, y, le
 
