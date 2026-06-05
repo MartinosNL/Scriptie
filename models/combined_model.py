@@ -59,7 +59,7 @@ def preprocess_data(df):
     X_complexity = df[["complexity"]].values
 
     # Combine features
-    X_combined = sp.hstack([X_ast_seq, sp.csr_matrix(X_complexity), X_code, X_ast]).tocsr()
+    X_combined = sp.hstack([X_ast_seq, X_complexity, X_code, X_ast]).tocsr()
     return X_combined, y, le
 
 
@@ -104,8 +104,8 @@ def main():
         item["combined_prediction_no_ngram"] = pred
         combined_results.append(item)
 
-    with open(os.path.join(path, "combined_predictions_no_ngram.json"), "w", encoding="utf-8") as f:
-        json.dump(combined_results, f, ensure_ascii=False, indent=4)
+    # with open(os.path.join(path, "combined_predictions_no_ngram.json"), "w", encoding="utf-8") as f:
+    #     json.dump(combined_results, f, ensure_ascii=False, indent=4)
 
 
 if __name__ == "__main__":
