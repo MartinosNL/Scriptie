@@ -50,7 +50,7 @@ def preprocess_data(df):
     y = le.fit_transform(df["runtime_bracket"])
 
     # TF-IDF features
-    vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 5))
+    vectorizer = TfidfVectorizer(max_features=1000, ngram_range=(1, 3))
     x = vectorizer.fit_transform(df["ast_seq"])
 
     return x, y, le
